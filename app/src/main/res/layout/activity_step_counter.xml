@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.229" />
 
     <TextView
-        android:id="@+id/stepCounter"
+        android:id="@+id/tvStepCounter"
         android:layout_width="154dp"
         android:layout_height="35dp"
         android:gravity="center"
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.121" />
 
     <TextView
-        android:id="@+id/stepDetector"
+        android:id="@+id/tvStepDetector"
         android:layout_width="154dp"
         android:layout_height="35dp"
         android:gravity="center"
@@ -46,6 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepCounter"
+        app:layout_constraintTop_toBottomOf="@+id/tvStepCounter"
         app:layout_constraintVertical_bias="0.121" />
 </androidx.constraintlayout.widget.ConstraintLayout>
