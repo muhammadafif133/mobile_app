@@ -15,9 +15,9 @@ public class pedometerCounter extends AppCompatActivity implements SensorEventLi
     private TextView tvStepDetector;
     private TextView tvStepCounter;
     private SensorManager sensorManager;
-    private Sensor mStepCounter;
-    private boolean isCounterSensorPresent;
-    int stepCount = 0;
+    private Sensor mStepCounter, mStepDetector;
+    private boolean isCounterSensorPresent, isDetectorSensorPresent;
+    int stepCount = 0, stepDetect = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,14 @@ public class pedometerCounter extends AppCompatActivity implements SensorEventLi
             tvStepCounter.setText("Counter sensor is not present");
             isCounterSensorPresent = false;
         }
+
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null){
+            mStepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+            isDetectorSensorPresent = true;
+        }else {
+            tvStepDetector.setText("Detector Sensor is not present");
+            isCounterSensorPresent = false;
+        }
     }
 
     @Override
@@ -47,15 +55,21 @@ public class pedometerCounter extends AppCompatActivity implements SensorEventLi
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             sensorManager.unregisterListener((SensorEventListener) this, mStepCounter);
         }
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null) {
+            sensorManager.unregisterListener((SensorEventListener) this, mStepDetector);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
             sensorManager.registerListener((SensorEventListener) this, mStepCounter, SensorManager.SENSOR_DELAY_NORMAL);
-        }
+
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null)
+            sensorManager.registerListener((SensorEventListener) this, mStepDetector, SensorManager.SENSOR_DELAY_NORMAL);
+
 
     }
 
@@ -65,6 +79,9 @@ public class pedometerCounter extends AppCompatActivity implements SensorEventLi
             stepCount = 0;
             stepCount = (int) sensorEvent.values[0];
             tvStepCounter.setText(String.valueOf(stepCount));
+        }else if (sensorEvent.sensor == mStepCounter){
+            stepDetect = (int) (stepDetect + sensorEvent.values[0]);
+            tvStepDetector.setText(String.valueOf(stepDetect));
         }
     }
 

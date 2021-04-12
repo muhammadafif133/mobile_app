@@ -30,8 +30,8 @@ public class stepCounter extends AppCompatActivity {
         SensorEventListener stepDetector = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-
-
+                SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+                stepCount = sharedPreferences.getInt("stepCount", 0);
 
                 //calculating magnitude using accelerometer sensor
                 if (sensorEvent != null ){
