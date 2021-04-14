@@ -9,9 +9,15 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +35,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.jar.Pack200;
 
 public class GoogleMapsActivity extends FragmentActivity implements
@@ -60,6 +68,56 @@ public class GoogleMapsActivity extends FragmentActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.search_address:
+                EditText addressField = (EditText) findViewById(R.id.location_search);
+                String address = addressField.getText().toString();
+
+                List<Address> addressList = null;
+                MarkerOptions userMarkerOptions = new MarkerOptions();
+
+                if (!TextUtils.isEmpty(address))
+                {
+                    Geocoder geocoder = new Geocoder(this);
+                    try {
+                        addressList = geocoder.getFromLocationName(address, 6);
+
+                        if (addressList != null)
+                        {
+                            for (int i=0; i<addressList.size(); i++)
+                            {
+                                Address userAddress = addressList.get(i);
+                                LatLng latLng = new LatLng(userAddress.getLatitude(), userAddress.getLongitude());
+
+                                userMarkerOptions.position(latLng);
+                                userMarkerOptions.title(address);
+                                userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                                mMap.addMarker(userMarkerOptions);
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(this, "Location is not found", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(this, "Please insert location name.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+
+        }
     }
 
     // Get current user location
