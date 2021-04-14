@@ -33,7 +33,6 @@ public class GetNearbyGym extends AsyncTask<Object, String, String>
         {
             e.printStackTrace();
         }
-
         return googleplaceData;
     }
 
