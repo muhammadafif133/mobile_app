@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DataParser {
     private HashMap<String, String> getSingleNearbyPlace(JSONObject googlePlaceJSON) {
-        HashMap<String, String> googlePlaceMap = new HashMap<>;
+        HashMap<String, String> googlePlaceMap = new HashMap<> ();
         String NameOfPlace = "-NA-";
         String vicinity = "-NA-";
         String latitude = "";
@@ -35,11 +35,13 @@ public class DataParser {
             googlePlaceMap.put("lat", latitude);
             googlePlaceMap.put("lng", longitude);
             googlePlaceMap.put("reference", reference);
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
         }
 
-
+        return googlePlaceMap;
     }
 
     private List<HashMap<String, String>> getAllNearbyPlaces(JSONArray jsonArray) {
