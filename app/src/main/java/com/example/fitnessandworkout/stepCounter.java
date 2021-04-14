@@ -14,7 +14,7 @@ public class stepCounter extends AppCompatActivity {
 
     private TextView tvStepDetector;
     private double MagnitudePrevious = 0;
-    private Integer stepCount = 0;
+    private Integer stepCount = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +25,12 @@ public class stepCounter extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        stepCount = sharedPreferences.getInt("stepCount", 0);
 
         SensorEventListener stepDetector = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-                stepCount = sharedPreferences.getInt("stepCount", 0);
 
                 //calculating magnitude using accelerometer sensor
                 if (sensorEvent != null ){
@@ -76,7 +75,7 @@ public class stepCounter extends AppCompatActivity {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.putInt("stepCount", stepCount);
+        editor.putInt("stepCount", 0);
         editor.apply();
     }
 
@@ -84,6 +83,7 @@ public class stepCounter extends AppCompatActivity {
         super.onResume();
 
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         stepCount = sharedPreferences.getInt("stepCount", 0);
     }
 }
