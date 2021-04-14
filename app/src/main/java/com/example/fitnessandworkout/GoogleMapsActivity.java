@@ -15,6 +15,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.EditText;
@@ -36,6 +37,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.io.ObjectStreamException;
 import java.util.List;
 import java.util.jar.Pack200;
 
@@ -52,6 +54,8 @@ public class GoogleMapsActivity extends FragmentActivity implements
     private Location lastLocation;
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
+    private double latitude, longitude;
+    private int ProximityRadius = 10000;
 
 
     @Override
@@ -72,6 +76,10 @@ public class GoogleMapsActivity extends FragmentActivity implements
 
     public void onClick(View v)
     {
+        String nearbyPlace = "gym";
+        Object transferData[] = new  Object[2]; //passing mMaps and url
+        GetNearbyGym getNearbyGym = new GetNearbyGym();
+
         switch (v.getId())
         {
             case R.id.search_address:
@@ -116,8 +124,32 @@ public class GoogleMapsActivity extends FragmentActivity implements
                 }
                 break;
 
+            case R.id.gym_nearby:
+                mMap.clear();
+                String url = getUrl(latitude, longitude, nearbyPlace);
+                transferData[0] = mMap;
+                transferData[1] = url;
+
+                getNearbyGym.execute(transferData);
+                Toast.makeText(this, "Searching for nearby gyms", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Showing for nearby gyms", Toast.LENGTH_SHORT).show();
+                break;
 
         }
+    }
+
+    private String getUrl(double latitude, double longitude, String nearbyPlace)
+    {
+        StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googleURL.append("location=" + latitude + "," + longitude);
+        googleURL.append("&radius=" + ProximityRadius);
+        googleURL.append("&type=" + nearbyPlace);
+        googleURL.append("&sensor=true");
+        googleURL.append("&key=" + "AIzaSyBtzVTP4QSPauHYMsQ5KJ1olyPQC8RKs1Q");
+
+        Log.d("GoogleMapsActivity","url =" + googleURL.toString());
+
+        return googleURL.toString();
     }
 
     // Get current user location
@@ -191,6 +223,9 @@ public class GoogleMapsActivity extends FragmentActivity implements
     //Location listener call onLocationChanged method
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+
         lastLocation = location;
 
         if(currentUserLocationMarker != null)
