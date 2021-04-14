@@ -19,6 +19,7 @@
             android:hint="Search place here... " />
 
         <ImageButton
+            android:id="@+id/search_address"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
