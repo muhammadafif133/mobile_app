@@ -2,7 +2,6 @@ package com.example.fitnessandworkout;
 
 import android.os.AsyncTask;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -24,7 +23,7 @@ public class GetNearbyGym extends AsyncTask<Object, String, String>
         mMap = (GoogleMap) objects[0];
         url = (String) objects[1];
 
-        DowloadUrl downloadUrl = new DowloadUrl();
+        DownloadUrl downloadUrl = new DownloadUrl();
         try
         {
             googleplaceData = downloadUrl.ReadTheURL(url);
@@ -61,7 +60,7 @@ public class GetNearbyGym extends AsyncTask<Object, String, String>
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
             markerOptions.title(nameOfPlace + ":" + vicinity);
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
