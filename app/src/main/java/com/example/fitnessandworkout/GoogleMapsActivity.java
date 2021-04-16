@@ -55,7 +55,7 @@ public class GoogleMapsActivity extends FragmentActivity implements
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
     private double latitude, longitude;
-    private int ProximityRadius = 10000;
+    private int ProximityRadius = 100000;
 
 
     @Override
@@ -76,7 +76,7 @@ public class GoogleMapsActivity extends FragmentActivity implements
 
     public void onClick(View v)
     {
-        String nearbyPlace = "gym";
+        String gym = "gym";
         Object transferData[] = new  Object[2]; //passing mMaps and url
         GetNearbyGym getNearbyGym = new GetNearbyGym();
 
@@ -126,7 +126,7 @@ public class GoogleMapsActivity extends FragmentActivity implements
 
             case R.id.gym_nearby:
                 mMap.clear();
-                String url = getUrl(latitude, longitude, nearbyPlace);
+                String url = getUrl(latitude, longitude, gym);
                 transferData[0] = mMap;
                 transferData[1] = url;
 
@@ -147,7 +147,7 @@ public class GoogleMapsActivity extends FragmentActivity implements
         googleURL.append("&sensor=true");
         googleURL.append("&key=" + "AIzaSyBtzVTP4QSPauHYMsQ5KJ1olyPQC8RKs1Q");
 
-        Log.d("GoogleMapsActivity","url =" + googleURL.toString());
+        Log.d("GoogleMapsActivity","url = " + googleURL.toString());
 
         return googleURL.toString();
     }
@@ -221,6 +221,7 @@ public class GoogleMapsActivity extends FragmentActivity implements
     }
 
     //Location listener call onLocationChanged method
+    //Get current user location
     @Override
     public void onLocationChanged(@NonNull Location location) {
         latitude = location.getLatitude();

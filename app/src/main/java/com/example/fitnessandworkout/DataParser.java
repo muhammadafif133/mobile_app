@@ -1,7 +1,5 @@
 package com.example.fitnessandworkout;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

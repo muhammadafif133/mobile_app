@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DowloadUrl
+public class DownloadUrl
 {
     public String ReadTheURL(String placeURL) throws IOException
     {
