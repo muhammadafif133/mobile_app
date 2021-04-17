@@ -74,6 +74,8 @@ public class GoogleMapsActivity extends FragmentActivity implements
         mapFragment.getMapAsync(this);
     }
 
+
+    //Function for search location button and search nearby gym
     public void onClick(View v)
     {
         String gym = "gym";
