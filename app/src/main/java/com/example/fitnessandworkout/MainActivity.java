@@ -3,6 +3,7 @@ package com.example.fitnessandworkout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         Boolean insert = DB.insertData(email, pass);
                         if(insert == true) {
                             Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), GoogleMapsActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), CameraApi.class);
                             startActivity(intent);
                         }else{
                             Toast.makeText(MainActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
