@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import com.example.fitnessandworkout.Fragments.CameraFragment;
 
 public class CameraApi extends AppCompatActivity {
-
     FrameLayout frameLayout;
 
     @Override

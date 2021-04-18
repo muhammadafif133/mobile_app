@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FitnessAndWorkout</string>
     <string name="title_activity_google_maps">Map</string>
+    <string name="take_picture">Take Picture</string>
 </resources>
