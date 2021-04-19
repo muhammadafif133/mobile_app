@@ -17,8 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnessandworkout.CameraApi;
-import com.example.fitnessandworkout.Fragments.LocalFragment;
-import com.example.fitnessandworkout.MainActivity;
+import com.example.fitnessandworkout.ImageFragments.LocalFragment;
 import com.example.fitnessandworkout.R;
 
 import java.util.ArrayList;

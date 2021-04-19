@@ -6,21 +6,30 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataBaseHandler extends SQLiteOpenHelper {
     public Context context;
     public static final String DATABASE_NAME = "FitnessWorkout.db";
     public static final int DATABASE_VERSION = 1;
 
-    // Table Image declaration
+    // Creating table Image
     public static final String IMAGE_TABLE = "image";
     public static final String IMG_ID = "id";
     public static final String IMG_URL = "ImageComplex";
 
-    // Table Login declaration
+    // Creating table Login
     public static final String USER_TABLE = "users";
     public static final String USER_EMAIL = "email";
     public static final String USER_PW = "password";
 
+    // Creating table Activity
+    public static final String ACT_TABLE = "activity";
+    public static final String ACT_ID = "id";
+    public static final String ACT_DATE = "date";
+    public static final String ACT_LEVEL = "level";
+    public static final String ACT_ACTIVITY = "activity";
 
     public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,25 +39,31 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     // Login query creation
     public static final String CREATE_TABLE_USER = "CREATE TABLE " + USER_TABLE + "(" + USER_EMAIL +
             " PRIMARY KEY," + USER_PW + " TEXT" + ")";
-    public static final String DROP_TABLE_USER = "DROP TABLE IF EXISTS " + USER_TABLE + ";";
-    //public static final String CHECK_EMAIL = "SELECT * FROM " + USER_TABLE + "WHERE " + USER_EMAIL + "= ?";
-    //public static final String CHECK_EMAIL_PW = "SELECT * FROM " + USER_TABLE + "WHERE " + USER_EMAIL + "= ?" + "AND"+ USER_PW + "= ?";
+    public static final String DROP_TABLE_USER = "DROP TABLE IF EXISTS " + USER_TABLE + "";
 
     // Image query creation
     public static final String CREATE_TABLE_IMG = "CREATE TABLE " + IMAGE_TABLE + "(" + IMG_ID +
             " INTEGER PRIMARY KEY AUTOINCREMENT," + IMG_URL + " TEXT" + ")";
-    public static final String DROP_TABLE_IMAGE = "DROP TABLE IF EXISTS " + IMAGE_TABLE + ";";
+    public static final String DROP_TABLE_IMAGE = "DROP TABLE IF EXISTS " + IMAGE_TABLE + "";
+
+    // Activity query creation
+    public static final String CREATE_TABLE_ACT = "CREATE TABLE " + ACT_TABLE + "(" + ACT_ID +
+            " INTEGER PRIMARY KEY AUTOINCREMENT," + ACT_DATE + " TEXT" + ACT_LEVEL + "TEXT" + ACT_ACTIVITY + "TEXT" + ")";
+    public static final String DROP_TABLE_ACT = "DROP TABLE IF EXISTS " + ACT_TABLE + "";
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_IMG);
+        db.execSQL(CREATE_TABLE_ACT);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DROP_TABLE_USER);
         db.execSQL(DROP_TABLE_IMAGE);
+        db.execSQL(DROP_TABLE_ACT);
         onCreate(db);
     }
 
@@ -56,6 +71,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.delete(IMAGE_TABLE, IMG_ID + "=" + row, null);
         sqLiteDatabase.delete(USER_TABLE, USER_EMAIL + "=" + row, null);
+        sqLiteDatabase.delete(ACT_TABLE, ACT_ID + "=" + row, null);
     }
 
     /**
@@ -105,5 +121,33 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public void addActivity(ActivityModel activityModel){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataBaseHandler.ACT_DATE, activityModel.getDate());
+        contentValues.put(DataBaseHandler.ACT_LEVEL, activityModel.getLevel());
+        contentValues.put(DataBaseHandler.ACT_ACTIVITY, activityModel.getActivity());
+        contentValues.put(DataBaseHandler.ACT_DATE, activityModel.getDate());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(DataBaseHandler.ACT_TABLE, null,contentValues);
+    }
+
+    public List<ActivityModel> getActivityList(){
+        String sql = "select * from " + ACT_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<ActivityModel> storeActivity = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()){
+            do {
+                int id = Integer.parseInt(cursor.getString(0));
+                String date = cursor.getString(1);
+                String level = cursor.getString(2);
+                String activity = cursor.getString(3);
+                storeActivity.add(new ActivityModel(id,date,level,activity));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return storeActivity;
     }
 }

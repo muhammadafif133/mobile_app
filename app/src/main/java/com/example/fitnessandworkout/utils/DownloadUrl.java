@@ -1,4 +1,4 @@
-package com.example.fitnessandworkout;
+package com.example.fitnessandworkout.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

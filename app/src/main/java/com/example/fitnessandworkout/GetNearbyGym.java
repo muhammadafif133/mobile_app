@@ -2,6 +2,8 @@ package com.example.fitnessandworkout;
 
 import android.os.AsyncTask;
 
+import com.example.fitnessandworkout.utils.DataParser;
+import com.example.fitnessandworkout.utils.DownloadUrl;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
