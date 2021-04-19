@@ -140,6 +140,13 @@ public class GoogleMapsActivity extends FragmentActivity implements
         }
     }
 
+    /**
+     *  Creating the url to find nearby place by setting up the location magnitude with Google API key
+     * @param latitude
+     * @param longitude
+     * @param nearbyPlace
+     * */
+
     private String getUrl(double latitude, double longitude, String nearbyPlace)
     {
         StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");

@@ -28,6 +28,7 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
     ArrayList<LocalResponse> singleRowArrayList;
     SQLiteDatabase db;
     DataBaseHandler myDatabase;
+
     public LocalDataBaseAdapter(Context context, ArrayList<LocalResponse> singleRowArrayList, SQLiteDatabase db, DataBaseHandler myDatabase) {
         this.context = context;
         this.singleRowArrayList = singleRowArrayList;
@@ -47,11 +48,10 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         myViewHolder.newsImage.setImageBitmap(getBitmapFromEncodedString(singleRowArrayList.get(i).image));
-        //  myViewHolder.id.setText(singleRowArrayList.get(i).uid);
         myViewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletedata(i,singleRowArrayList);
+                deleteData(i,singleRowArrayList);
             }
         });
     }
@@ -73,9 +73,7 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
         }
     }
 
-
-
-    public void deletedata(final int position, final ArrayList<LocalResponse> singleRowArrayList){
+    public void deleteData(final int position, final ArrayList<LocalResponse> singleRowArrayList){
         new AlertDialog.Builder(context)
                 .setIcon(R.drawable.defaultimage)
                 .setTitle("Delete result")

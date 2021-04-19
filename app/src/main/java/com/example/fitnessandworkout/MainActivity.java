@@ -10,13 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.fitnessandworkout.utils.DataBaseHandler;
+
 
 public class MainActivity extends AppCompatActivity {
 
     EditText userEmail, password;
     Button signUp, signIn;
     TextView info;
-    DBHelper DB;
+    //DBHelper DB;
+    DataBaseHandler DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         info = (TextView)findViewById(R.id.tvInfo);
         signUp = (Button)findViewById(R.id.btnSignUp);
         signIn = (Button)findViewById(R.id.btnSignIn);
-        DB = new DBHelper(this);
+        DB = new DataBaseHandler(this);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         Boolean insert = DB.insertData(email, pass);
                         if(insert == true) {
                             Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), Camera2Api.class);
+                            Intent intent = new Intent(getApplicationContext(), CameraApi.class);
                             startActivity(intent);
                         }else{
                             Toast.makeText(MainActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
