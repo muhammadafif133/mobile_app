@@ -1,4 +1,4 @@
-package com.example.fitnessandworkout;
+package com.example.fitnessandworkout.utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

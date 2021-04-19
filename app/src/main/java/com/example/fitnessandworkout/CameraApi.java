@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
-import com.example.fitnessandworkout.Fragments.CameraFragment;
+import com.example.fitnessandworkout.ImageFragments.CameraFragment;
 
 public class CameraApi extends AppCompatActivity {
     FrameLayout frameLayout;

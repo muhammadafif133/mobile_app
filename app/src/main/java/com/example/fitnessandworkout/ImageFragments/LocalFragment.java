@@ -1,4 +1,4 @@
-package com.example.fitnessandworkout.Fragments;
+package com.example.fitnessandworkout.ImageFragments;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

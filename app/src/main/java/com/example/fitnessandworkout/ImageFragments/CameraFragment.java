@@ -1,4 +1,4 @@
-package com.example.fitnessandworkout.Fragments;
+package com.example.fitnessandworkout.ImageFragments;
 
 import android.Manifest;
 import android.app.Activity;
@@ -133,14 +133,8 @@ public class CameraFragment extends Fragment {
     private String getEncodedString(Bitmap bitmap){
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, os);
-
-       /* or use below if you want 32 bit images
-
-        bitmap.compress(Bitmap.CompressFormat.PNG, (0â€“100 compression), os);*/
         byte[] imageArr = os.toByteArray();
-
         return Base64.encodeToString(imageArr, Base64.URL_SAFE);
 
     }
