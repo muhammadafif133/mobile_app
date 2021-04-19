@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.fitnessandworkout.utils.ActivityAdapter;
 import com.example.fitnessandworkout.utils.ActivityModel;
 import com.example.fitnessandworkout.utils.DataBaseHandler;
 
