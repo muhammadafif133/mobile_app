@@ -77,9 +77,9 @@ public class CameraFragment extends Fragment {
     private void setDataToDataBase() {
         db = databaseHandler.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(databaseHandler.KEY_IMG_URL,getEncodedString(theImage));
+        cv.put(databaseHandler.IMG_URL,getEncodedString(theImage));
 
-        long id = db.insert(databaseHandler.TABLE_NAME, null, cv);
+        long id = db.insert(databaseHandler.IMAGE_TABLE, null, cv);
         if (id < 0) {
             Toast.makeText(getContext(), "Something went wrong. Please try again later...", Toast.LENGTH_LONG).show();
         } else {

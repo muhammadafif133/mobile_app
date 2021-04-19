@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.fitnessandworkout.utils.DataBaseHandler;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText userEmail, password;
     Button login;
-    DBHelper DB;
+    //DBHelper DB;
+    DataBaseHandler DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         userEmail = (EditText)findViewById(R.id.etEmail);
         password = (EditText)findViewById(R.id.etPassword);
         login = (Button)findViewById(R.id.btnLogIn);
-        DB = new DBHelper(this);
+        DB = new DataBaseHandler(this);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                     Boolean checkemailpassword = DB.checkEmailPassword(email, pass);
                     if(checkemailpassword == true) {
                         Toast.makeText(LoginActivity.this, "Log in successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), Camera2Api.class);
+                        Intent intent = new Intent(getApplicationContext(), CameraApi.class);
                         startActivity(intent);
                     }else{
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

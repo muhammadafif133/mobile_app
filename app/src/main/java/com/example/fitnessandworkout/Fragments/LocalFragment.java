@@ -46,19 +46,18 @@ public class LocalFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         singleRowArrayList = new ArrayList<>();
-        String[] columns = {DataBaseHandler.KEY_ID, DataBaseHandler.KEY_IMG_URL};
-        cursor = db.query(DataBaseHandler.TABLE_NAME, columns, null, null, null, null, null);
+        String[] columns = {DataBaseHandler.IMG_ID, DataBaseHandler.IMG_URL};
+        cursor = db.query(DataBaseHandler.IMAGE_TABLE, columns, null, null, null, null, null);
         while (cursor.moveToNext()) {
 
-            int index1 = cursor.getColumnIndex(DataBaseHandler.KEY_ID);
-            int index2 = cursor.getColumnIndex(DataBaseHandler.KEY_IMG_URL);
+            int index1 = cursor.getColumnIndex(DataBaseHandler.IMG_ID);
+            int index2 = cursor.getColumnIndex(DataBaseHandler.IMG_URL);
             uid = cursor.getInt(index1);
             image = cursor.getString(index2);
             singleRow = new LocalResponse(image,uid);
             singleRowArrayList.add(singleRow);
         }
         if (singleRowArrayList.size()==0){
-            //empty.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         }else {
             LocalDataBaseAdapter localDataBaseResponse = new LocalDataBaseAdapter(getContext(), singleRowArrayList, db, myDatabase);
