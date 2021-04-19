@@ -150,4 +150,20 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return storeActivity;
     }
+
+    public void updateActivity(ActivityModel employeeModelClass){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataBaseHandler.ACT_DATE,employeeModelClass.getDate());
+        contentValues.put(DataBaseHandler.ACT_LEVEL,employeeModelClass.getLevel());
+        contentValues.put(DataBaseHandler.ACT_ACTIVITY,employeeModelClass.getActivity());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(ACT_TABLE,contentValues,ACT_ID + " = ?" , new String[]
+                {String.valueOf(employeeModelClass.getId())});
+    }
+
+    public void deleteActivity(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ACT_TABLE, ACT_ID + " = ? ", new String[]
+                {String.valueOf(id)});
+    }
 }
