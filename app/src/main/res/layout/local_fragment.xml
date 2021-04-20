@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:gravity="center"
+        android:text="MUSCLE PROGRESS"
+        android:textColor="@color/black"
+        android:textSize="20pt"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
@@ -13,6 +25,5 @@
         android:layout_marginTop="5dp"
         android:background="@color/white"
         android:padding="3dp"
-        android:scrollbars="none"
-        />
+        android:scrollbars="none" />
 </LinearLayout>

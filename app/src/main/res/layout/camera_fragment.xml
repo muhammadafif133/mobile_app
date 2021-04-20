@@ -2,28 +2,31 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show off your muscle!"
+        android:text="SHOW OFF YOUR MUSCLE!"
         android:layout_gravity="center"
-        android:layout_margin="12dp"
-        android:textSize="18dp"
+        android:layout_margin="30dp"
+        android:textSize="35dp"
+        android:textStyle="bold"
         android:textAlignment="center"
-        android:background="#EBEBEB"
-        />
+        android:background="@drawable/button_bg" />
     <TextView
         android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Track your muscle"
+        android:text="TRACK YOU MUSCLE"
         android:layout_gravity="center"
-        android:layout_margin="12dp"
-        android:textSize="18dp"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
+        android:textSize="38dp"
         android:textAlignment="center"
-        android:background="#EBEBEB"
+        android:background="@drawable/button_bg"
         android:layout_below="@id/text"
         >
     </TextView>

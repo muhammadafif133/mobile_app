@@ -1,59 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center"
-        android:text="Track your workout progress"
-        android:textColorHighlight="@color/cardview_dark_background"
-        android:textSize="24sp" />
+        android:layout_height="match_parent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/anton"
+            android:gravity="center"
+            android:text="TRACK YOUR PROGRESS"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="20pt"
+            android:textStyle="bold" />
 
 
-    <EditText
-        android:id="@+id/etDate"
-        android:layout_margin="5dp"
-        android:hint="Enter Date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_margin="5dp"
+            android:hint="Enter Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
 
-    <EditText
-        android:id="@+id/etLevel"
-        android:layout_margin="5dp"
-        android:hint="Enter Workout Level"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etLevel"
+            android:layout_margin="5dp"
+            android:hint="Enter Workout Level"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/etActivity"
-        android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:layout_margin="5dp"
-        android:hint="Enter Activity" />
+        <EditText
+            android:id="@+id/etActivity"
+            android:layout_width="match_parent"
+            android:layout_height="155dp"
+            android:layout_margin="5dp"
+            android:hint="Enter Activity" />
 
-    <Button
-        android:textStyle="bold"
-        android:layout_margin="5dp"
-        android:id="@+id/btnAdd"
-        android:text="Add Activity"
-        android:background="#388E3C"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:id="@+id/btnAdd"
+            android:text="Add Activity"
+            android:background="@drawable/button_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <Button
-        android:textStyle="bold"
-        android:layout_margin="5dp"
-        android:id="@+id/btnView"
-        android:text="View Activities"
-        android:background="#0288D1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:id="@+id/btnView"
+            android:text="View Activities"
+            android:background="@drawable/button_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+
