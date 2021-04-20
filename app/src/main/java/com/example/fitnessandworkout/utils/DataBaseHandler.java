@@ -48,7 +48,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     // Activity query creation
     public static final String CREATE_TABLE_ACT = "CREATE TABLE " + ACT_TABLE + "(" + ACT_ID +
-            " INTEGER PRIMARY KEY AUTOINCREMENT," + ACT_DATE + " TEXT" + ACT_LEVEL + "TEXT" + ACT_ACTIVITY + "TEXT" + ")";
+            " INTEGER PRIMARY KEY AUTOINCREMENT," + ACT_DATE + " TEXT," + ACT_LEVEL + " TEXT," + ACT_ACTIVITY + " TEXT" + ")";
     public static final String DROP_TABLE_ACT = "DROP TABLE IF EXISTS " + ACT_TABLE + "";
 
 
@@ -123,12 +123,13 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             return false;
     }
 
+
+
     public void addActivity(ActivityModel activityModel){
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseHandler.ACT_DATE, activityModel.getDate());
         contentValues.put(DataBaseHandler.ACT_LEVEL, activityModel.getLevel());
         contentValues.put(DataBaseHandler.ACT_ACTIVITY, activityModel.getActivity());
-        contentValues.put(DataBaseHandler.ACT_DATE, activityModel.getDate());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(DataBaseHandler.ACT_TABLE, null,contentValues);
     }
