@@ -14,7 +14,6 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText userEmail, password;
     Button login;
-    //DBHelper DB;
     DataBaseHandler DB;
 
     @Override
@@ -39,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
                     Boolean checkemailpassword = DB.checkEmailPassword(email, pass);
                     if(checkemailpassword == true) {
                         Toast.makeText(LoginActivity.this, "Log in successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), WorkoutProgress.class);
+                        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                         startActivity(intent);
                     }else{
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
