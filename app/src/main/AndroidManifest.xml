@@ -34,11 +34,9 @@
         <activity
             android:name=".GoogleMapsActivity"
             android:label="@string/title_activity_google_maps" />
-        <activity android:name=".pedometerCounter" />
         <activity android:name=".stepCounter" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CameraApi" />
-        <activity android:name=".Camera2Api" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
