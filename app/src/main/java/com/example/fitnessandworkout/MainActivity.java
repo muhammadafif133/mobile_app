@@ -3,19 +3,23 @@ package com.example.fitnessandworkout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.fitnessandworkout.utils.DataBaseHandler;
+
 
 public class MainActivity extends AppCompatActivity {
 
     EditText userEmail, password;
     Button signUp, signIn;
     TextView info;
-    DBHelper DB;
+    //DBHelper DB;
+    DataBaseHandler DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         info = (TextView)findViewById(R.id.tvInfo);
         signUp = (Button)findViewById(R.id.btnSignUp);
         signIn = (Button)findViewById(R.id.btnSignIn);
-        DB = new DBHelper(this);
+        DB = new DataBaseHandler(this);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         Boolean insert = DB.insertData(email, pass);
                         if(insert == true) {
                             Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), WorkoutProgress.class);
                             startActivity(intent);
                         }else{
                             Toast.makeText(MainActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
@@ -63,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-
             }
         });
     }
