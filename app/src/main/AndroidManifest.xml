@@ -20,9 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessAndWorkout">
-        <activity android:name=".MainMenu"></activity>
-        <activity android:name=".ViewActivity" />
-        <activity android:name=".WorkoutProgress" />
+
+
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -37,7 +37,11 @@
         <activity android:name=".stepCounter" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CameraApi" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainMenu" />
+        <activity android:name=".ViewActivity" />
+        <activity android:name=".WorkoutProgress" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
