@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/anton"
+            android:gravity="center"
+            android:text="LET'S GET HEALTHY TODAY"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="20pt"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnStep"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="@color/red"
+            android:background="@drawable/button_bg"
+            android:text="COUNT YOUR STEP NOW!"
+            android:layout_marginBottom="10dp"
+            tools:layout_editor_absoluteX="138dp"
+            tools:layout_editor_absoluteY="185dp" />
+
+        <Button
+            android:id="@+id/btnProgress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="WORKOUT PROGRESS"
+            android:background="@drawable/button_bg"
+            android:layout_marginBottom="10dp"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="307dp" />
+
+        <Button
+            android:id="@+id/btnMuscle"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="MUSCLE ACHIEVEMENT"
+            android:background="@drawable/button_bg"
+            android:layout_marginBottom="10dp"
+            tools:layout_editor_absoluteX="169dp"
+            tools:layout_editor_absoluteY="403dp" />
+
+        <Button
+            android:id="@+id/btnMap"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="FIND NEAREST GYM"
+            android:background="@drawable/button_bg"
+            android:layout_marginBottom="30dp"
+            tools:layout_editor_absoluteX="169dp"
+            tools:layout_editor_absoluteY="403dp" />
+
+        <Button
+            android:id="@+id/btnSignOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN OUT"
+            android:background="@drawable/button_bg"
+            tools:layout_editor_absoluteX="169dp"
+            tools:layout_editor_absoluteY="403dp" />
+
+    </LinearLayout>
+</ScrollView>
