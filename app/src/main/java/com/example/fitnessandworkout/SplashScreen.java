@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+/**
+ * REFERENCES
+ * Splash screen is referred in 6002CEM Module
+ */
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override
