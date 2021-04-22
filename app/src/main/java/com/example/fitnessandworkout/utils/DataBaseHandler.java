@@ -52,6 +52,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public static final String DROP_TABLE_ACT = "DROP TABLE IF EXISTS " + ACT_TABLE + "";
 
 
+    // Create table in database
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
@@ -59,6 +60,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_ACT);
     }
 
+    // Delete table in database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DROP_TABLE_USER);
@@ -67,6 +69,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Delete entry in database
     public void deleteEntry(long row) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.delete(IMAGE_TABLE, IMG_ID + "=" + row, null);
@@ -123,8 +126,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             return false;
     }
 
-
-
+    // Insert data in database
     public void addActivity(ActivityModel activityModel){
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseHandler.ACT_DATE, activityModel.getDate());
@@ -134,6 +136,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.insert(DataBaseHandler.ACT_TABLE, null,contentValues);
     }
 
+    // Get all workout progress into recyclerview in database
     public List<ActivityModel> getActivityList(){
         String sql = "select * from " + ACT_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -152,16 +155,18 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         return storeActivity;
     }
 
-    public void updateActivity(ActivityModel employeeModelClass){
+    // Update workout progress from recyclerview and save into database
+    public void updateActivity(ActivityModel activityModel){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DataBaseHandler.ACT_DATE,employeeModelClass.getDate());
-        contentValues.put(DataBaseHandler.ACT_LEVEL,employeeModelClass.getLevel());
-        contentValues.put(DataBaseHandler.ACT_ACTIVITY,employeeModelClass.getActivity());
+        contentValues.put(DataBaseHandler.ACT_DATE,activityModel.getDate());
+        contentValues.put(DataBaseHandler.ACT_LEVEL,activityModel.getLevel());
+        contentValues.put(DataBaseHandler.ACT_ACTIVITY,activityModel.getActivity());
         SQLiteDatabase db = this.getWritableDatabase();
         db.update(ACT_TABLE,contentValues,ACT_ID + " = ?" , new String[]
-                {String.valueOf(employeeModelClass.getId())});
+                {String.valueOf(activityModel.getId())});
     }
 
+    // Delete workout progress in recyclerview and database
     public void deleteActivity(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(ACT_TABLE, ACT_ID + " = ? ", new String[]

@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +36,11 @@ public class LocalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.local_fragment,container,false);
         recyclerView = view.findViewById(R.id.recyclerview);
+
+        // Call data in database to be viewed
         myDatabase = new DataBaseHandler(getContext());
         db = myDatabase.getWritableDatabase();
         setData();
@@ -45,9 +51,13 @@ public class LocalFragment extends Fragment {
         db = myDatabase.getWritableDatabase();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        // create arraylist to view the picture in recyclerview
         singleRowArrayList = new ArrayList<>();
         String[] columns = {DataBaseHandler.IMG_ID, DataBaseHandler.IMG_URL};
         cursor = db.query(DataBaseHandler.IMAGE_TABLE, columns, null, null, null, null, null);
+
+        // Use cursor to read data in database
         while (cursor.moveToNext()) {
 
             int index1 = cursor.getColumnIndex(DataBaseHandler.IMG_ID);
@@ -57,6 +67,7 @@ public class LocalFragment extends Fragment {
             singleRow = new LocalResponse(image,uid);
             singleRowArrayList.add(singleRow);
         }
+        // No image is viewed if it is not available in database
         if (singleRowArrayList.size()==0){
             recyclerView.setVisibility(View.GONE);
         }else {

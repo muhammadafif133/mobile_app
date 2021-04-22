@@ -41,6 +41,11 @@ import java.io.ObjectStreamException;
 import java.util.List;
 import java.util.jar.Pack200;
 
+/**
+ * REFERENCE
+ * Google Map activity is referred to Coding Cafe Youtube Channel
+ * https://youtu.be/6fVhmtzwvfk
+ */
 public class GoogleMapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -126,6 +131,7 @@ public class GoogleMapsActivity extends FragmentActivity implements
                 }
                 break;
 
+            // Called when "Dumbbell" icon is clicked in the Google Map
             case R.id.gym_nearby:
                 mMap.clear();
                 String url = getUrl(latitude, longitude, gym);
@@ -173,6 +179,8 @@ public class GoogleMapsActivity extends FragmentActivity implements
         }
     }
 
+
+    // Request permission to use device's location
     public boolean checkUserLocationPermission()
     {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -193,6 +201,12 @@ public class GoogleMapsActivity extends FragmentActivity implements
         }
     }
 
+    /**
+     * Get user's current location
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
     {

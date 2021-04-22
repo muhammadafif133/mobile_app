@@ -33,6 +33,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        // Create list view for workout progress in database
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.activity_item_list,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -43,18 +45,22 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ActivityModel activityModel = activity.get(position);
 
+        // Retrieve and view data from database
         holder.textViewID.setText(Integer.toString(activityModel.getId()));
         holder.etDate.setText(activityModel.getDate());
         holder.etLevel.setText(activityModel.getLevel());
         holder.etActivity.setText(activityModel.getActivity());
 
+        // Called when "Edit" button is clicked
         holder.button_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Update input fields
                 String strDate = holder.etDate.getText().toString();
                 String strLevel = holder.etLevel.getText().toString();
                 String strActivity = holder.etActivity.getText().toString();
 
+                // Update input fields into database
                 dataBaseHandler.updateActivity(new ActivityModel(activityModel.getId(),strDate,strLevel,strActivity));
                 notifyDataSetChanged();
                 ((Activity) context).finish();
@@ -62,9 +68,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             }
         });
 
+        // Called when "Delete" button is clicked
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Delete data from database
                 dataBaseHandler.deleteActivity(activityModel.getId());
                 activity.remove(position);
                 notifyDataSetChanged();
@@ -73,11 +81,16 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     }
 
+    /**
+     * List all data from database
+     * @return all workout progress
+     */
     @Override
     public int getItemCount() {
         return activity.size();
     }
 
+    // Initialize and create shortcut for input fields
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textViewID;
         EditText etDate, etLevel, etActivity;

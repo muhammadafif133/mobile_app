@@ -17,9 +17,15 @@ public class CameraApi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_api);
 
+        // Call camera fragment
         loadFragment(new CameraFragment(), false);
     }
 
+    /**
+     * Call clicked fragment
+     * @param fragment
+     * @param bool
+     */
     public void loadFragment(Fragment fragment, Boolean bool) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameLayout, fragment);

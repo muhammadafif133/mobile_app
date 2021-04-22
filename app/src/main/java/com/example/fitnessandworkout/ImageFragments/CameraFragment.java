@@ -31,7 +31,6 @@ public class CameraFragment extends Fragment {
     private static final int CAMERA_REQUEST = 1888;
     TextView text,text1;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
-    //Bitmap photo;
     String photo;
     DataBaseHandler databaseHandler;
     private SQLiteDatabase db;
@@ -41,21 +40,23 @@ public class CameraFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.camera_fragment,container,false);
 
-
-        // imageView =view. findViewById(R.id.imageView1);
+        // Create shortcut for fragment text
         text = view.findViewById(R.id.text);
         text1 = view.findViewById(R.id.text1);
         databaseHandler = new DataBaseHandler(getContext());
 
+        // Called when "SHOW OFF YOUR MUSCLE!" text is clicked
         text.setOnClickListener(
                 new View.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(View v) {
+                        // Request permission to use device's camera
                         if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
                         {
                             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
                         }
+                        // Use device's camera if permission is granted
                         else
                         {
                             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -65,9 +66,11 @@ public class CameraFragment extends Fragment {
                     }
                 });
 
+        // Called when "TRACK YOUR MUSCLE" text is clicked
         text1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // call Local fragment to view images
                 ((CameraApi) getActivity()).loadFragment(new LocalFragment(), true);
             }
         });
@@ -79,6 +82,7 @@ public class CameraFragment extends Fragment {
         ContentValues cv = new ContentValues();
         cv.put(databaseHandler.IMG_URL,getEncodedString(theImage));
 
+        // Save image after into database after being captured
         long id = db.insert(databaseHandler.IMAGE_TABLE, null, cv);
         if (id < 0) {
             Toast.makeText(getContext(), "Something went wrong. Please try again later...", Toast.LENGTH_LONG).show();
@@ -123,13 +127,14 @@ public class CameraFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
         {
+            // Pass string type of image to be saved into database
             theImage = (Bitmap) data.getExtras().get("data");
-            photo=getEncodedString(theImage);
+            photo = getEncodedString(theImage);
             setDataToDataBase();
         }
     }
 
-
+    // Convert bitmap into string to save into database
     private String getEncodedString(Bitmap bitmap){
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
