@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -28,17 +31,28 @@ public class MainMenu extends AppCompatActivity implements GoogleApiClient.OnCon
     GoogleApiClient googleApiClient;
     GoogleSignInOptions gso;
 
+    Animation animTitle;
+    TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        // Shortcut to each buttons
         btnStep = findViewById(R.id.btnStep);
         btnProgress = findViewById(R.id.btnProgress);
         btnMuscle = findViewById(R.id.btnMuscle);
         btnMap = findViewById(R.id.btnMap);
         btnSignOut = findViewById(R.id.btnSignOut);
+        title = (TextView)findViewById(R.id.tvTitle);
 
+        // Title fade in animation
+        animTitle = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
+        title.setVisibility(View.VISIBLE);
+        title.startAnimation(animTitle);
+
+        // To recognize which Google account is signed in
         gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -108,6 +122,7 @@ public class MainMenu extends AppCompatActivity implements GoogleApiClient.OnCon
     @Override
     protected void onStart() {
         super.onStart();
+        // Request API permission for sign in using Google account
         OptionalPendingResult<GoogleSignInResult> opr= Auth.GoogleSignInApi.silentSignIn(googleApiClient);
         if(opr.isDone()){
             GoogleSignInResult result = opr.get();

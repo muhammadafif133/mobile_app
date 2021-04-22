@@ -8,13 +8,19 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 public class stepCounter extends AppCompatActivity {
 
-    private TextView tvStepDetector;
+    private TextView tvStepDetector, title;
     private double MagnitudePrevious = 0;
     private Integer stepCount = -1;
+    Animation animTitle;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +28,21 @@ public class stepCounter extends AppCompatActivity {
         setContentView(R.layout.activity_step_counter);
 
         tvStepDetector = findViewById(R.id.tvStepDetector);
+        title = (TextView)findViewById(R.id.title);
+
+        animTitle = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
+        title.setVisibility(View.VISIBLE);
+        title.startAnimation(animTitle);
+
+        // Call Sensor Manager to user accelerometer sensor service
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        // Save step count in shared preferences
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         stepCount = sharedPreferences.getInt("stepCount", 0);
 
+        // Counting step using 3 dimensional accelerometer value
         SensorEventListener stepDetector = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
@@ -59,6 +74,7 @@ public class stepCounter extends AppCompatActivity {
 
     }
 
+    // Called step count value when app is on pause
     protected void onPause(){
         super.onPause();
 
@@ -69,6 +85,7 @@ public class stepCounter extends AppCompatActivity {
         editor.apply();
     }
 
+    // Reset step count value when app is on stop
     protected void onStop(){
         super.onStop();
 
@@ -79,6 +96,7 @@ public class stepCounter extends AppCompatActivity {
         editor.apply();
     }
 
+    // Get step count when app is on resume
     protected void onResume(){
         super.onResume();
 

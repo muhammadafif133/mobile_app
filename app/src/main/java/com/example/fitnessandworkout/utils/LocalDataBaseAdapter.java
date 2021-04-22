@@ -28,12 +28,18 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
     SQLiteDatabase db;
     DataBaseHandler myDatabase;
 
+    /**
+     * Create arraylist to retrieve image from  database
+     * @param context
+     * @param singleRowArrayList
+     * @param db
+     * @param myDatabase
+     */
     public LocalDataBaseAdapter(Context context, ArrayList<LocalResponse> singleRowArrayList, SQLiteDatabase db, DataBaseHandler myDatabase) {
         this.context = context;
         this.singleRowArrayList = singleRowArrayList;
         this.db = db;
         this.myDatabase = myDatabase;
-
     }
 
     @NonNull
@@ -55,6 +61,7 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
         });
     }
 
+    // View all images in the database
     @Override
     public int getItemCount() {
         return singleRowArrayList.size();
@@ -68,10 +75,14 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
             super(itemView);
             newsImage = (ImageView) itemView.findViewById(R.id.newsImage);
             delete = (ImageView) itemView.findViewById(R.id.delete);
-            // id = (TextView) itemView.findViewById(R.id.id);
         }
     }
 
+    /**
+     * Delete image in the recyclerview
+     * @param position
+     * @param singleRowArrayList
+     */
     public void deleteData(final int position, final ArrayList<LocalResponse> singleRowArrayList){
         new AlertDialog.Builder(context)
                 .setIcon(R.drawable.defaultimage)
@@ -79,6 +90,7 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
                 .setMessage("Are you sure you want delete this result?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
+                    // Called when "delete" icon is clicked
                     public void onClick(DialogInterface dialog, int which) {
                         /* This is where deletions should be handled */
                         myDatabase.deleteEntry(singleRowArrayList.get(position).getUid());
@@ -96,15 +108,10 @@ public class LocalDataBaseAdapter extends RecyclerView.Adapter<LocalDataBaseAdap
     }
 
 
+    // Convert string data type in database into bitmap
     private Bitmap getBitmapFromEncodedString(String encodedString){
-
         byte[] arr = Base64.decode(encodedString, Base64.URL_SAFE);
-
         Bitmap img = BitmapFactory.decodeByteArray(arr, 0, arr.length);
-
         return img;
-
     }
-
-
 }

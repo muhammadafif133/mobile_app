@@ -25,6 +25,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
+ * REFERENCES
  * Google sign in tutorial is referred from ProgrammingKnowledge Youtube Channel
  * (https://youtu.be/uPg1ydmnzpk)
  * Sign up and sign in tutorial is referred from AllCoding Tutorial Youtube Channel
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     Button signUp, signIn;
     TextView info, title;
     DataBaseHandler DB;
-    Animation animSI, animSU;
+    Animation animTitle;
 
     private GoogleApiClient googleApiClient;
     private static final int Google_SI = 1;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //Give users option to use which Google account to sign in
         GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
 
+        // Shortcut to input fields and buttons
         userEmail = (EditText)findViewById(R.id.etEmail);
         password = (EditText)findViewById(R.id.etPassword);
         info = (TextView)findViewById(R.id.tvInfo);
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         googleSignin = (SignInButton)findViewById(R.id.btnGoogle);
         DB = new DataBaseHandler(this);
 
+        // Title animation
+        animTitle = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
+        title.setVisibility(View.VISIBLE);
+        title.startAnimation(animTitle);
+
         // Sign up button to register new users
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,14 +79,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 String  email = userEmail.getText().toString();
                 String  pass = password.getText().toString();
 
-                animSU = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move);
-                title.setVisibility(View.VISIBLE);
-                title.startAnimation(animSU);
-
+                // Checking if email and password fields is empty
                 if(email.equals("") || pass.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else{
                     Boolean checkemail = DB.checkEmail(email);
+                    // Check email if it has been used
                     if(checkemail == false){
                         Boolean insert = DB.insertData(email, pass);
                         if(insert == true) {
@@ -94,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         Toast.makeText(MainActivity.this, "Email already exist. Please use different email", Toast.LENGTH_SHORT).show();
                     }
                 }
-
             }
         });
 
@@ -102,9 +106,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                animSI = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
-                title.setVisibility(View.VISIBLE);
-                title.startAnimation(animSI);
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);

@@ -17,6 +17,7 @@ public class ViewActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    // Call recyclerview function to view data from database
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class ViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
+        // Create array list to view workout progress data from database
         DataBaseHandler dataBaseHandler = new DataBaseHandler(this);
         List<ActivityModel> activityModels = dataBaseHandler.getActivityList();
 
