@@ -15,6 +15,15 @@ import android.widget.Toast;
 import com.example.fitnessandworkout.utils.ActivityModel;
 import com.example.fitnessandworkout.utils.DataBaseHandler;
 
+/**
+ * REFERENCES
+ * CRUD operation to SQLite database
+ * 6002CEM module
+ * from Coding with Dev Youtube Channel
+ * https://youtu.be/BcpVlXo2F3U
+ *
+ */
+
 public class WorkoutProgress extends AppCompatActivity {
 
     EditText etDate, etLevel, etActivity;

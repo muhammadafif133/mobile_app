@@ -13,6 +13,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+/**
+ * REFERENCES
+ * Accelerometer sensor to detect step is referred from
+ * Sarti Technology Youtube Channel
+ * https://youtu.be/NnvJylicKvE
+ */
+
 public class stepCounter extends AppCompatActivity {
 
     private TextView tvStepDetector, title;

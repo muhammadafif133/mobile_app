@@ -9,6 +9,11 @@ import android.widget.FrameLayout;
 
 import com.example.fitnessandworkout.ImageFragments.CameraFragment;
 
+/**
+ * REFERENCES
+ * Camera Sensor is referred from 6002CEM module
+ */
+
 public class CameraApi extends AppCompatActivity {
     FrameLayout frameLayout;
 
